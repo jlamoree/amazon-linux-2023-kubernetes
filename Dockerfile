@@ -11,12 +11,16 @@ EOF
 
 RUN dnf install -y awscli-2 kubectl git tar vi bash-completion
 
-WORKDIR /root
+RUN groupadd -g 1000 user && useradd -u 1000 -g 1000 -m user
 
-RUN git clone https://github.com/ahmetb/kubectx .kubectx && \
-    chmod 755 .kubectx/kubectx && \
-    ln -s .kubectx/completion/kubectx.bash /etc/bash_completion.d/kubectx && \
-    echo -e '\nexport PATH=/root/.kubectx:$PATH' >> .bash_profile && \
-    echo 'complete -C /usr/bin/aws_completer aws' >> .bash_profile
+RUN git clone https://github.com/ahmetb/kubectx /opt/kubectx && \
+    chmod 755 /opt/kubectx/kubectx && ln -s /opt/kubectx/kubectx /usr/bin/kubectx && \
+    ln -s /opt/kubectx/completion/kubectx.bash /etc/bash_completion.d/kubectx && \
+    echo 'complete -C /usr/bin/aws_completer aws' >> /home/user/.bash_profile && \
+    chown user:user /home/user/.bash_profile
+
+WORKDIR /home/user
+
+USER user:user
 
 CMD /bin/bash --login
