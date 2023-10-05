@@ -9,7 +9,8 @@ gpgcheck=1
 gpgkey=https://pkgs.k8s.io/core:/stable:/v1.27/rpm/repodata/repomd.xml.key
 EOF
 
-RUN dnf install -y awscli-2 kubectl git tar vi bash-completion
+RUN dnf update -y && dnf install -y awscli-2 kubectl git tar vi bash-completion && \
+    dnf clean all
 
 RUN groupadd -g 1000 user && useradd -u 1000 -g 1000 -m user
 
