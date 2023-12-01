@@ -1,17 +1,17 @@
 ## Usage
 
 ```shell
-tag=2023100501
+tag=2023120101
 docker run --rm -it --hostname al2023kube --name al2023kube \
-  jlamoree/amazon-linux-2023-kubernetes:$tag
+  lamoreesoftware/amazon-linux-2023-kubernetes:$tag
 ```
 
 ## Build Setup
 
 ### Testing
 ```shell
-tag=2023100501
-docker build --tag jlamoree/amazon-linux-2023-kubernetes:$tag . 
+tag=2023120101
+docker build --tag lamoreesoftware/amazon-linux-2023-kubernetes:$tag .
 ```
 
 ### Multi-Architecture
@@ -20,7 +20,7 @@ docker buildx create --name local --node local --platform linux/arm64,linux/amd6
 docker buildx use local
 docker login
 
-tag=2023100501
+tag=2023120101
 docker buildx build --platform=linux/amd64,linux/arm64 --push \
-  --tag jlamoree/amazon-linux-2023-kubernetes:$tag .
+  --tag lamoreesoftware/amazon-linux-2023-kubernetes:$tag .
 ```

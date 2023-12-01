@@ -1,4 +1,4 @@
-FROM amazonlinux:2023.2.20230920.1
+FROM amazonlinux:2023.2.20231113.0
 
 COPY <<EOF /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
