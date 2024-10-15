@@ -1,12 +1,14 @@
 FROM amazonlinux:2023.2.20231113.0
 
+ARG KUBERNETES_VERSION="1.27"
+
 COPY <<EOF /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://pkgs.k8s.io/core:/stable:/v1.27/rpm/
+baseurl=https://pkgs.k8s.io/core:/stable:/v${KUBERNETES_VERSION}/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://pkgs.k8s.io/core:/stable:/v1.27/rpm/repodata/repomd.xml.key
+gpgkey=https://pkgs.k8s.io/core:/stable:/v${KUBERNETES_VERSION}/rpm/repodata/repomd.xml.key
 EOF
 
 RUN dnf update -y && dnf install -y awscli-2 kubectl git tar vi bash-completion && \
